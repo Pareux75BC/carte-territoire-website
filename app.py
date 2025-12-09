@@ -14,8 +14,8 @@ st.set_page_config(
     layout="wide"
 )
 
-API_ENDPOINT = "https://carte-territoire-24889736924.europe-west1.run.app/upload-and-process"
-API_ENDPOINT_GET = "https://carte-territoire-24889736924.europe-west1.run.app/"
+API_ENDPOINT = "http://localhost:8000/upload-and-process/" #"https://carte-territoire-24889736924.europe-west1.run.app/upload-and-process"
+API_ENDPOINT_GET = "http://localhost:8000/" #"https://carte-territoire-24889736924.europe-west1.run.app/"
 
 # -------------------- STYLES --------------------
 
@@ -171,23 +171,20 @@ if st.session_state.captured_image:
     st.image(st.session_state.captured_image, use_container_width=True)
 
     if st.button("🚀 Send to API"):
-        buffered = BytesIO()
-        st.session_state.captured_image.save(buffered, format="PNG")
-        img_b64 = base64.b64encode(buffered.getvalue()).decode()
+        buffer = BytesIO()
+        st.session_state.captured_image.save(buffer, format="PNG")
+        buffer.seek(0)
 
-        payload = {"image": img_b64}
+        files = {"file": ("input.png", buffer.read(), "image/png")}
 
         with st.spinner("Processing image..."):
-            response = requests.post(API_ENDPOINT, json=payload)
+            response = requests.post(API_ENDPOINT, files=files)
 
         if response.status_code == 200:
-            output_b64 = response.json()["image/PNG"]
-            output_img = Image.open(
-                BytesIO(base64.b64decode(output_b64))
-            )
+            output_image = Image.open(BytesIO(response.content))
 
             st.markdown("### 🎨 Output image")
-            st.image(output_img, use_container_width=True)
+            st.image(output_image, use_container_width=True)
             st.success("Image successfully processed ✨")
 
         else:
