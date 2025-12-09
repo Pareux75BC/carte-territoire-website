@@ -18,7 +18,7 @@ MAPBOX_STYLE = "mapbox/satellite-v9" # Use a satellite style
 
 # Define the initial map center and zoom
 INITIAL_CENTER = [48.8566, 2.3522] # Example: Paris, France
-INITIAL_ZOOM = 12
+INITIAL_ZOOM = 4
 
 API_ENDPOINT = "http://localhost:8000/upload-and-process/" #"https://carte-territoire-24889736924.europe-west1.run.app/upload-and-process"
 API_ENDPOINT_GET = "http://localhost:8000/" #"https://carte-territoire-24889736924.europe-west1.run.app/"
@@ -73,7 +73,7 @@ st.markdown(
     <div class="hero">
         <h1>🗺️ La carte et le territoire</h1>
         <p>
-            Satellite landscapes explored through image processing.
+            Satellite landscapes explored through image processing !
         </p>
         <p>
             <strong>Le Wagon — Batch 2130</strong>
@@ -124,7 +124,7 @@ with tab_upload:
 
 with tab_map:
     st.info(
-        "Browse and zoom in / zoom out the map as you wish below to select an area, then click 'Capture View'."
+        "Browse and zoom in and out the map as you wish below to select an area, then click 'Capture View'."
     )
 
     # Initialize Folium Map
@@ -156,8 +156,8 @@ with tab_map:
             st.session_state.last_bbox = bbox_string
 
             # --- Static Images API Call ---
-            image_width = 800
-            image_height = 800
+            image_width = 512
+            image_height = 512
             static_api_url = f"https://api.mapbox.com/styles/v1/{MAPBOX_STYLE}/static/[{bbox_string}]/{image_width}x{image_height}?access_token={MAPBOX_TOKEN}&padding=0.1"
 
             with st.spinner("Fetching static map image..."):

@@ -75,93 +75,17 @@ st.markdown(
         <p>
             <strong>Le Wagon — Batch 2130</strong>
         </p>
+        <p>
+            <strong>Happily sponsored by the French public administration 😄</strong>
+        </p>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-# -------------------- CONTROLS --------------------
-
-# st.markdown("## 🌍 Select a satellite view")
-
-# col1, col2 = st.columns([3, 1])
-
-# with col2:
-#     square_crop = st.checkbox("📐 Force square image", value=True)
-#     st.caption("Limits the capture to a square format")
-
-# # -------------------- GOOGLE MAPS EMBED --------------------
-
-# GOOGLE_MAPS_HTML = f"""
-# <!DOCTYPE html>
-# <html>
-# <head>
-#   <style>
-#     #map {{
-#       height: 600px;
-#       width: 100%;
-#       border-radius: 12px;
-#     }}
-#     #capture {{
-#       margin-top: 10px;
-#       padding: 10px 16px;
-#       font-size: 16px;
-#     }}
-#   </style>
-# </head>
-# <body>
-#   <div id="map"></div>
-#   <button id="capture">📸 Capture image</button>
-
-#   <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_MAPS_KEY}}"></script>
-#   <script>
-#     let map;
-
-#     function initMap() {{
-#       map = new google.maps.Map(document.getElementById("map"), {{
-#         center: {{ lat: 48.8566, lng: 2.3522 }},
-#         zoom: 14,
-#         mapTypeId: "satellite",
-#         disableDefaultUI: true
-#       }});
-#     }}
-
-#     initMap();
-
-#     document.getElementById("capture").onclick = async () => {{
-#       const canvas = document.createElement("canvas");
-#       const mapDiv = document.getElementById("map");
-
-#       const size = Math.min(mapDiv.offsetWidth, mapDiv.offsetHeight);
-#       canvas.width = { 'size' if square_crop else 'mapDiv.offsetWidth' };
-#       canvas.height = { 'size' if square_crop else 'mapDiv.offsetHeight' };
-
-#       const ctx = canvas.getContext("2d");
-
-#       const xml = new XMLSerializer().serializeToString(mapDiv);
-#       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${{mapDiv.offsetWidth}}" height="${{mapDiv.offsetHeight}}">
-#         <foreignObject width="100%" height="100%">${{xml}}</foreignObject>
-#       </svg>`;
-
-#       const img = new Image();
-#       img.onload = () => {{
-#         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-#         const dataUrl = canvas.toDataURL("image/png");
-#         window.parent.postMessage(dataUrl, "*");
-#       }};
-#       img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-#     }};
-#   </script>
-# </body>
-# </html>
-# """
-
-# with col1:
-#     st.components.v1.html(GOOGLE_MAPS_HTML, height=700)
-
 # -------------------- IMAGE HANDLING --------------------
 
-st.markdown("## 🧠 Process image")
+st.markdown("## 🌍 Process an image")
 
 if "captured_image" not in st.session_state:
     st.session_state.captured_image = None
@@ -170,12 +94,11 @@ if "captured_image" not in st.session_state:
 image_data = st.query_params.get("image")
 
 st.info(
-    "Use the **Capture image** button above to take a clean satellite snapshot "
-    "(no labels, no UI)."
+    "Upload a satellite image"
 )
 
 uploaded = st.file_uploader(
-    "Or upload a satellite image manually",
+    "Use the button below",
     type=["png", "jpg", "jpeg"],
 )
 
@@ -242,9 +165,9 @@ if st.session_state.captured_image:
         else:
             st.error(f"API error ({response.status_code})")
 
-if st.button("🤗 Test API"):
-    try:
-        response = requests.get(API_ENDPOINT_GET).json()['greeting']
-        st.markdown(response)
-    except:
-        st.markdown('Something went wrong 😥')
+# if st.button("🤗 Test API"):
+#     try:
+#         response = requests.get(API_ENDPOINT_GET).json()['greeting']
+#         st.markdown(response)
+#     except:
+#         st.markdown('Something went wrong 😥')
