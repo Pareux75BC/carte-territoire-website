@@ -9,53 +9,9 @@ import numpy as np
 from utils.constants import MAPBOX_STYLE, INITIAL_CENTER, INITIAL_ZOOM, API_ENDPOINT_INITIAL, FLAIR_CLASS_DATA
 
 # -------------------- CONFIG --------------------------------------------------
-st.header("🛰️ Exploration - Initial model")
+st.header("🛰️ Exploration phase (first viable model)")
 
 DICO_LABEL = FLAIR_CLASS_DATA
-# -------------------- STYLES --------------------------------------------------
-
-st.markdown(
-    """
-    <style>
-        .block-container {
-            padding-top: 1rem !important;
-        }
-        .hero {
-            text-align: center;
-            padding: 0.5rem 1rem 1rem 1rem;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 0;
-        }
-        .hero p {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# -------------------- HERO ----------------------------------------------------
-
-st.markdown(
-    """
-    <div class="hero">
-        <h1>🌍 La carte et le territoire</h1>
-        <p>
-            Satellite landscapes explored through image processing !
-        </p>
-        <p>
-            <strong>Le Wagon — Batch 2130</strong>
-        </p>
-        <p>
-            <strong>Happily sponsored by the French public administration 😄</strong>
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 # -------------------- IMAGE HANDLING (Mapbox/Folium Version) ------------------
 # --- Initialize session state variables for management ------------------------
