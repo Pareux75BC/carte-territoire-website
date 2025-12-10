@@ -42,6 +42,17 @@ FLAIR_CLASS_DATA = {
 15  : ['greenhouse','#9999ff'],
 }
 
+REDUCED_7 = {
+    0: ["other", "#000000"],
+    1: ["building", "#db0e9a"],
+    2: ["built surface", "#938e7b"],
+    3: ["herbaceous vegetation", "#10cc1c"],
+    4: ["water", "#1553ae"],
+    5: ["vegetation", "#095b30"],
+    6: ["agriculture", '#fff30d']
+}
+
+DICO_LABEL = REDUCED_7
 # -------------------- STYLES --------------------------------------------------
 
 st.markdown(
@@ -218,7 +229,7 @@ if st.session_state.captured_image:
                 st.caption("🗂️ Legend")
 
                 try:
-                    for _, (label, color) in FLAIR_CLASS_DATA.items():
+                    for _, (label, color) in DICO_LABEL.items():
                         st.markdown(
                             f"""
                             <div style="
