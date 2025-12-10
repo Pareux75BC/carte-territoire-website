@@ -58,19 +58,20 @@ DICO_LABEL = REDUCED_7
 st.markdown(
     """
     <style>
+        .block-container {
+            padding-top: 1rem !important;
+        }
         .hero {
             text-align: center;
-            padding: 3rem 1rem 2rem 1rem;
+            padding: 0.5rem 1rem 1rem 1rem;
         }
         .hero h1 {
             font-size: 3rem;
+            margin-bottom: 0;
         }
         .hero p {
-            font-size: 1.2rem;
-            color: #555;
-        }
-        .block {
-            margin-top: 2rem;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
         }
     </style>
     """,
@@ -82,7 +83,7 @@ st.markdown(
 st.markdown(
     """
     <div class="hero">
-        <h1>🗺️ La carte et le territoire</h1>
+        <h1>🌍 La carte et le territoire</h1>
         <p>
             Satellite landscapes explored through image processing !
         </p>
@@ -108,7 +109,7 @@ if "captured_image" not in st.session_state:
 if "last_bbox" not in st.session_state:
     st.session_state.last_bbox = None
 
-tab_upload, tab_map = st.tabs(["📂 Upload an image", "🌍 Explore the world"])
+tab_upload, tab_map = st.tabs(["📂 Upload an image", "🗺️ Explore the world"])
 with tab_upload:
     st.info("Upload a satellite image")
 
