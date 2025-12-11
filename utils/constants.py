@@ -6,8 +6,8 @@ INITIAL_CENTER = [42.5471, 3.0362] # Pyrénées orientales
 INITIAL_ZOOM = 6
 
 # API Endpoints
-API_ENDPOINT_INITIAL = "http://localhost:8000/upload-and-process/"
-API_ENDPOINT_LATEST = "http://localhost:8000/upload-and-process-reduced/"
+API_ENDPOINT_INITIAL = 'https://carte-territoire-demo-24889736924.europe-west1.run.app/upload-and-process/' #"http://localhost:8000/upload-and-process/"
+API_ENDPOINT_LATEST = 'https://carte-territoire-demo-24889736924.europe-west1.run.app/upload-and-process-reduced/' #"http://localhost:8000/upload-and-process-reduced/"
 
 # Color/Label Dictionaries
 FLAIR_CLASS_DATA = {
