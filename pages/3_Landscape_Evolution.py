@@ -6,8 +6,11 @@ from io import BytesIO
 # constants and dictionaries
 from utils.constants import MAPBOX_STYLE, INITIAL_CENTER, INITIAL_ZOOM, API_ENDPOINT_INITIAL, REDUCED_7
 
-st.header("Landscape Evolution")
-st.subheader("Las Vegas")
+st.header("⌛ Landscape Evolution")
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.subheader("💰 Las Vegas through time 💰")
 
 # st.subheader("Upload 2 or 3 satellite images of the same place (different years)")
 
@@ -51,11 +54,11 @@ perc_02 = 12.3 + 71.7
 
 with col1:
     st.image(lab1, width=325)
-    st.markdown(f"Land artificialisation rate = {perc_72}%")
+    st.markdown(f"Land artificialisation rate: {perc_72} %")
 
 with col2:
     st.image(lab2, width=325)
-    st.markdown(f"{perc_02} %")
+    st.markdown(f"Land artificialisation rate: {perc_02} %")
 
 # Allow multiple files
 # uploaded_files = st.file_uploader(
@@ -65,8 +68,7 @@ with col2:
 #     key="surface_evolution_uploader",
 # )
 # 19.31304931640625 19.2962646484375 12.3321533203125 71.70257568359375
-perc_72 = 19.3 + 19.2
-perc_02 = 12.3 + 71.7
+
 # if uploaded_files:
 #     n_files = len(uploaded_files)
 
