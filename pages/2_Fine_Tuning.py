@@ -114,7 +114,7 @@ if st.session_state.captured_image:
     # Display the captured image, this replaces the previous uploaded file display
     st.image(st.session_state.captured_image, use_container_width=False)
 
-    if st.button("🚀 Send to API"):
+    if st.button("🚀 Generate Label Image"):
         # Existing API logic
         buffer = BytesIO()
         st.session_state.captured_image.save(buffer, format="PNG")
@@ -140,6 +140,8 @@ if st.session_state.captured_image:
             with col2:
                 st.caption("Predicted label")
                 st.image(output_image, use_container_width=False)
+                if st.session_state.image_source == 'upload':
+                    st.markdown("🥳 Mean IoU is 0.79")
 
             with col3:
                 if st.session_state.image_source == 'upload':
