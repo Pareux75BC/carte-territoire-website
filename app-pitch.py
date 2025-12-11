@@ -346,6 +346,7 @@ else:
     # ====== TAB 1: FILE UPLOAD ======
     with tab_upload:
         st.subheader("Upload a satellite image")
+        DISPLAY_WIDTH = 600
 
         uploaded_file = st.file_uploader(
             "Upload a satellite image",
@@ -355,7 +356,9 @@ else:
 
         if uploaded_file is not None:
             image = Image.open(uploaded_file).convert("RGB")
-            st.image(image, caption="Uploaded image", use_container_width=True)
+            display_image = image.copy()
+            display_image.thumbnail((DISPLAY_WIDTH, DISPLAY_WIDTH))
+            st.image(display_image, caption="Uploaded image", use_container_width=False)
 
             img_array = np.array(image)
             st.write("Image shape:", img_array.shape)
@@ -365,9 +368,9 @@ else:
             st.write(y_chunks," divisions sur la hauteur de l'image et",x_chunks, "sur la largeur")
             st.write("Nombre de chunks:", total_chunks)
 
-            if st.button("➡️ Use this image for the API", key="use_uploaded"):
-                st.session_state.captured_image = image
-                st.success("Uploaded image selected for API ✅")
+            # if st.button("➡️ Use this image for the API", key="use_uploaded"):
+            #     st.session_state.captured_image = image
+            #     st.success("Uploaded image selected for API ✅")
 
 
     # ====== TAB 2: MAP SNAPSHOT ======
@@ -445,14 +448,7 @@ else:
 
     # -------------------- API CALL SECTION --------------------
 
-    st.markdown("---")
-    st.header("⚙️ Model API")
-
-    # Show currently selected image (from upload or map)
     if st.session_state.captured_image is not None:
-        st.markdown("### ✅ Current input image")
-        st.image(st.session_state.captured_image, use_container_width=True)
-
         if st.button("🚀 Send to API", type="primary", key="send_to_api"):
             buffer = BytesIO()
             st.session_state.captured_image.save(buffer, format="PNG")
