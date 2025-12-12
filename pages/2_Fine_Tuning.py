@@ -13,6 +13,28 @@ st.header("🎯 Fine-tuning the model")
 
 DICO_LABEL = REDUCED_7
 
+# --- START AMENDMENT: Cross-Page Data Initialization ---
+
+# Check if an uploaded file object exists from a previous session/page
+if st.session_state.uploaded_file_object is not None:
+    # 1. Rewind the file pointer to the beginning (in case it was read on the previous page)
+    st.session_state.uploaded_file_object.seek(0)
+
+    # 2. Re-open the file object to get the PIL Image
+    try:
+        image = Image.open(st.session_state.uploaded_file_object).convert("RGB")
+
+        # 3. Update the session state variables for this page
+        st.session_state.captured_image = image
+        st.session_state.image_source = 'upload' # Force the source to 'upload'
+
+        # Display a subtle message to confirm data transfer
+        st.info("Loaded image from 'Exploration phase' upload.")
+
+    except Exception as e:
+        st.warning(f"Could not load image from session state: {e}")
+
+
 # -------------------- IMAGE HANDLING (Mapbox/Folium Version) ------------------
 # --- Initialize session state variables for management ------------------------
 if "image_source" not in st.session_state:
